@@ -1,0 +1,33 @@
+namespace ${1}\Modules;
+
+/**
+ * ${2} module
+ * @author UJLAKY Tibor <tujlaky@plex.hu>
+ */
+class ${3} extends \Portalfw\Modules\ModuleBase {
+	
+	/**
+	 * Necessary tables for this module.
+	 * @var array
+	 */
+	protected static $tables = array(
+		${4}
+	);
+
+		
+	public static function install() {
+		${5}
+		// install database tables
+		$system =& \Portalfw::getInstance();
+		$dbHandler =& $system->getDbHandler();
+
+		foreach (static::$tables as $table) {
+			if ( !$dbHandler->tableExists($table) ) {
+				$dbHandler->createTable($table);
+				$dbHandler->initTable($table);
+			}
+		}
+
+	}
+
+}
